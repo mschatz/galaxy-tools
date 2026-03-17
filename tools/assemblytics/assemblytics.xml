@@ -29,9 +29,9 @@
 
     <inputs>
         <param name="delta" type="data" format="tabular" label="Match file from Nucmer" />
-        <param name="uniquelength" type="integer" value="10000" min="0", label="Unique sequence length required" help="The unique sequence length required represents an anchor for determining if a sequence is unique enough to safely call variants from, which is an alternative to the mapping quality filter for read alignment." />
-        <param name="minsize" type="integer" value="50"    min="0", label="Minimum variant size" help="Minimum variant size to report" />
-        <param name="maxsize" type="integer" value="10000" min="0", label="Maximum variant size" help="Maximum variant size to report" />
+        <param name="uniquelength" type="integer" value="10000" min="0" label="Unique sequence length required" help="The unique sequence length required represents an anchor for determining if a sequence is unique enough to safely call variants from, which is an alternative to the mapping quality filter for read alignment." />
+        <param name="minsize" type="integer" value="50"    min="0" label="Minimum variant size" help="Minimum variant size to report" />
+        <param name="maxsize" type="integer" value="10000" min="0" label="Maximum variant size" help="Maximum variant size to report" />
     </inputs>
 
     <outputs>
