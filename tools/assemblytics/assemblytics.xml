@@ -29,7 +29,7 @@
 
     <inputs>
         <param name="delta" type="data" format="tabular" label="Match file from Nucmer" />
-        <param name="uniquelength" type="integer" value="10000" min="0", label="Unique sequence length required" help="Used for filtering repetitive alignments by requiring unique alignments of at least this length" />
+        <param name="uniquelength" type="integer" value="10000" min="0", label="Unique sequence length required" help="The unique sequence length required represents an anchor for determining if a sequence is unique enough to safely call variants from, which is an alternative to the mapping quality filter for read alignment." />
         <param name="minsize" type="integer" value="50"    min="0", label="Minimum variant size" help="Minimum variant size to report" />
         <param name="maxsize" type="integer" value="10000" min="0", label="Maximum variant size" help="Maximum variant size to report" />
     </inputs>
@@ -66,12 +66,33 @@
 
     <tests>
         <test>
-            <param name="in" value="test"/>
-            <output name="out">
-                <assert_contents>
-                    <has_text text="test"/>
-                </assert_contents>
-            </output>
+            <param name="delta" value="sample.delta" />
+            <output name="output.Assemblytics_assembly_stats.txt" file="output.Assemblytics_assembly_stats.txt" ftype="txt" />
+            <output name="output.Assemblytics_results.zip" file="output.Assemblytics_results.zip" ftype="zip" />
+            <output name="output.Assemblytics_structural_variants.bed" file="output.Assemblytics_structural_variants.bed" ftype="bed" />
+            <output name="output.Assemblytics_structural_variants.summary" file="output.Assemblytics_structural_variants.summary" ftype="txt" />
+            <output name="output.Assemblytics_structural_variants.summary.csv" file="output.Assemblytics_structural_variants.summary.csv" ftype="csv" />
+            <output name="output.Assemblytics.Dotplot_filtered.png" file="output.Assemblytics.Dotplot_filtered.png" ftype="png" />
+            <output name="output.Assemblytics.Nchart.pdf" file="output.Assemblytics.Nchart.pdf" ftype="pdf" />
+            <output name="output.Assemblytics.Nchart.png" file="output.Assemblytics.Nchart.png" ftype="png" />
+            <output name="output.Assemblytics.size_distributions.all_variants.50-500.pdf" file="output.Assemblytics.size_distributions.all_variants.50-500.pdf" ftype="pdf" />
+            <output name="output.Assemblytics.size_distributions.all_variants.50-500.png" file="output.Assemblytics.size_distributions.all_variants.50-500.png" ftype="png" />
+            <output name="output.Assemblytics.size_distributions.all_variants.500-10000.pdf" file="output.Assemblytics.size_distributions.all_variants.500-10000.pdf" ftype="pdf" />
+            <output name="output.Assemblytics.size_distributions.all_variants.500-10000.png" file="output.Assemblytics.size_distributions.all_variants.500-10000.png" ftype="png" />
+            <output name="output.Assemblytics.size_distributions.all_variants.log_all_sizes.pdf" file="output.Assemblytics.size_distributions.all_variants.log_all_sizes.pdf" ftype="pdf" />
+            <output name="output.Assemblytics.size_distributions.all_variants.log_all_sizes.png" file="output.Assemblytics.size_distributions.all_variants.log_all_sizes.png" ftype="png" />
+            <output name="output.Assemblytics.unique_length_filtered_l1000.delta.gz" file="output.Assemblytics.unique_length_filtered_l1000.delta.gz" ftype="gz" />
+            <output name="output.coords.csv" file="output.coords.csv" ftype="csv" />
+            <output name="output.coords.query.genome" file="output.coords.query.genome" ftype="txt" />
+            <output name="output.coords.ref.genome" file="output.coords.ref.genome" ftype="txt" />
+            <output name="output.coords.tab" file="output.coords.tab" ftype="txt" />
+            <output name="output.info.csv" file="output.info.csv" ftype="csv" />
+            <output name="output.oriented_coords.csv" file="output.oriented_coords.csv" ftype="csv" />
+            <output name="output.query.index" file="output.query.index" ftype="txt" />
+            <output name="output.ref.index" file="output.ref.index" ftype="txt" />
+            <output name="output.variant_preview.txt" file="output.variant_preview.txt" ftype="txt" />
+            <output name="output.variants_between_alignments.bed" file="output.variants_between_alignments.bed" ftype="bed" />
+            <output name="output.variants_within_alignments.bed" file="output.variants_within_alignments.bed" ftype="bed" />
         </test>
     </tests>
 
