@@ -1,36 +1,69 @@
-<tool id="example" name="example" version="@TOOL_VERSION@+galaxy@VERSION_SUFFIX@" profile="20.01" license="MIT">
-    <description>serving as an example</description>
+<tool id="assemblytics" name="Assemblytics" version="@TOOL_VERSION@+galaxy@VERSION_SUFFIX@" license="MIT" profile="20.01">
+    <description>Analyze your assembly by comparing it to a reference genome</description>
     <macros>
-        <token name="@TOOL_VERSION@">0.1.0</token>
+        <token name="@TOOL_VERSION@">1.2.1</token>
         <token name="@VERSION_SUFFIX@">0</token>
     </macros>
     <edam_topics>
-        <edam_topic>topic_1234</edam_topic>
+        <edam_topic>topic_0196</edam_topic>
+        <edam_topic>topic_3673</edam_topic>
+        <edam_topic>topic_0102</edam_topic>
     </edam_topics>
     <edam_operations>
-        <edam_operation>operation_1234</edam_operation>
+        <edam_operation>operation_0310</edam_operation>
+        <edam_operation>operation_0525</edam_operation>
+        <edam_operation>operation_3227</edam_operation>
+        <edam_operation>operation_3216</edam_operation>
     </edam_operations>
     <xrefs>
-        <xref type="bio.tools"></xref>
+        <xref type="bio.tools">Assemblytics</xref>
     </xrefs>
     <requirements>
-        <requirement type="package" version="5.0.018">bash</requirement>
+        <requirement type="package" version="@TOOL_VERSION@">assemblytics</requirement>
     </requirements>
+
     <command detect_errors="exit_code"><![CDATA[
-        echo '$in' > '$out'
+      Assemblytics $delta output $uniquelength $minsize $maxsize
+      mv output/progress.log .
     ]]></command>
+
     <inputs>
-        <param name="in" type="text" value="" label="A text onput parameter" help="Could need some help">
-            <sanitizer invalid_char="">
-                <valid initial="string.letters,string.digits">
-                    <add value="_" />
-                </valid>
-            </sanitizer>
-        </param>
+        <param name="delta" type="data" format="tabular" label="Match file from Nucmer" />
+        <param name="uniquelength" type="integer" value="10000" min="0", label="Unique sequence length required" help="Used for filtering repetitive alignments by requiring unique alignments of at least this length" />
+        <param name="minsize" type="integer" value="50"    min="0", label="Minimum variant size" help="Minimum variant size to report" />
+        <param name="maxsize" type="integer" value="10000" min="0", label="Maximum variant size" help="Maximum variant size to report" />
     </inputs>
+
     <outputs>
-        <data format="txt" name="out" />
+      <data format="txt" name="progress.log" from_work_dir="progress.log" label="${tool.name} on ${on_string}: progress.log" />
+      <data format="txt" name="output.Assemblytics_assembly_stats.txt" from_work_dir="output.Assemblytics_assembly_stats.txt" label="${tool.name} on ${on_string}: output.Assemblytics_assembly_stats.txt" />
+      <data format="zip" name="output.Assemblytics_results.zip" from_work_dir="output.Assemblytics_results.zip" label="${tool.name} on ${on_string}: output.Assemblytics_results.zip" />
+      <data format="bed" name="output.Assemblytics_structural_variants.bed" from_work_dir="output.Assemblytics_structural_variants.bed" label="${tool.name} on ${on_string}: output.Assemblytics_structural_variants.bed" />
+      <data format="txt" name="output.Assemblytics_structural_variants.summary" from_work_dir="output.Assemblytics_structural_variants.summary" label="${tool.name} on ${on_string}: output.Assemblytics_structural_variants.summary" />
+      <data format="csv" name="output.Assemblytics_structural_variants.summary.csv" from_work_dir="output.Assemblytics_structural_variants.summary.csv" label="${tool.name} on ${on_string}: output.Assemblytics_structural_variants.summary.csv" />
+      <data format="png" name="output.Assemblytics.Dotplot_filtered.png" from_work_dir="output.Assemblytics.Dotplot_filtered.png" label="${tool.name} on ${on_string}: output.Assemblytics.Dotplot_filtered.png" />
+      <data format="pdf" name="output.Assemblytics.Nchart.pdf" from_work_dir="output.Assemblytics.Nchart.pdf" label="${tool.name} on ${on_string}: output.Assemblytics.Nchart.pdf" />
+      <data format="png" name="output.Assemblytics.Nchart.png" from_work_dir="output.Assemblytics.Nchart.png" label="${tool.name} on ${on_string}: output.Assemblytics.Nchart.png" />
+      <data format="pdf" name="output.Assemblytics.size_distributions.all_variants.50-500.pdf" from_work_dir="output.Assemblytics.size_distributions.all_variants.50-500.pdf" label="${tool.name} on ${on_string}: output.Assemblytics.size_distributions.all_variants.50-500.pdf" />
+      <data format="png" name="output.Assemblytics.size_distributions.all_variants.50-500.png" from_work_dir="output.Assemblytics.size_distributions.all_variants.50-500.png" label="${tool.name} on ${on_string}: output.Assemblytics.size_distributions.all_variants.50-500.png" />
+      <data format="pdf" name="output.Assemblytics.size_distributions.all_variants.500-10000.pdf" from_work_dir="output.Assemblytics.size_distributions.all_variants.500-10000.pdf" label="${tool.name} on ${on_string}: output.Assemblytics.size_distributions.all_variants.500-10000.pdf" />
+      <data format="png" name="output.Assemblytics.size_distributions.all_variants.500-10000.png" from_work_dir="output.Assemblytics.size_distributions.all_variants.500-10000.png" label="${tool.name} on ${on_string}: output.Assemblytics.size_distributions.all_variants.500-10000.png" />
+      <data format="pdf" name="output.Assemblytics.size_distributions.all_variants.log_all_sizes.pdf" from_work_dir="output.Assemblytics.size_distributions.all_variants.log_all_sizes.pdf" label="${tool.name} on ${on_string}: output.Assemblytics.size_distributions.all_variants.log_all_sizes.pdf" />
+      <data format="png" name="output.Assemblytics.size_distributions.all_variants.log_all_sizes.png" from_work_dir="output.Assemblytics.size_distributions.all_variants.log_all_sizes.png" label="${tool.name} on ${on_string}: output.Assemblytics.size_distributions.all_variants.log_all_sizes.png" />
+      <data format="gz" name="output.Assemblytics.unique_length_filtered_l1000.delta.gz" from_work_dir="output.Assemblytics.unique_length_filtered_l1000.delta.gz" label="${tool.name} on ${on_string}: output.Assemblytics.unique_length_filtered_l1000.delta.gz" />
+      <data format="csv" name="output.coords.csv" from_work_dir="output.coords.csv" label="${tool.name} on ${on_string}: output.coords.csv" />
+      <data format="txt" name="output.coords.query.genome" from_work_dir="output.coords.query.genome" label="${tool.name} on ${on_string}: output.coords.query.genome" />
+      <data format="txt" name="output.coords.ref.genome" from_work_dir="output.coords.ref.genome" label="${tool.name} on ${on_string}: output.coords.ref.genome" />
+      <data format="txt" name="output.coords.tab" from_work_dir="output.coords.tab" label="${tool.name} on ${on_string}: output.coords.tab" />
+      <data format="csv" name="output.info.csv" from_work_dir="output.info.csv" label="${tool.name} on ${on_string}: output.info.csv" />
+      <data format="csv" name="output.oriented_coords.csv" from_work_dir="output.oriented_coords.csv" label="${tool.name} on ${on_string}: output.oriented_coords.csv" />
+      <data format="txt" name="output.query.index" from_work_dir="output.query.index" label="${tool.name} on ${on_string}: output.query.index" />
+      <data format="txt" name="output.ref.index" from_work_dir="output.ref.index" label="${tool.name} on ${on_string}: output.ref.index" />
+      <data format="txt" name="output.variant_preview.txt" from_work_dir="output.variant_preview.txt" label="${tool.name} on ${on_string}: output.variant_preview.txt" />
+      <data format="bed" name="output.variants_between_alignments.bed" from_work_dir="output.variants_between_alignments.bed" label="${tool.name} on ${on_string}: output.variants_between_alignments.bed" />
+      <data format="bed" name="output.variants_within_alignments.bed" from_work_dir="output.variants_within_alignments.bed" label="${tool.name} on ${on_string}: output.variants_within_alignments.bed" />
     </outputs>
+
     <tests>
         <test>
             <param name="in" value="test"/>
@@ -41,15 +74,16 @@
             </output>
         </test>
     </tests>
+
     <help><![CDATA[
-
-.. class:: infomark
-
-**What it does**
-
-Serves as an example
+Assemblytics is an application for detecting and analyzing variants from a de novo genome assembly 
+aligned to a reference genome. It incorporates a unique anchor filtering approach to increase 
+robustness to repetitive elements, and identifies six classes of variants based on their distinct 
+alignment signatures. Assemblytics can be applied both to comparing aberrant genomes, such as 
+human cancers, to a reference, or to identify differences between related species. Multiple 
+visualizations enable in-depth explorations of the genomic distributions of variants.
     ]]></help>
     <citations>
-        <citation type="doi">10.1093/nar/gky379</citation>
+        <citation type="doi">10.1093/bioinformatics/btw369</citation>
     </citations>
 </tool>
