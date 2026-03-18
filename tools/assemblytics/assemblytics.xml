@@ -115,55 +115,51 @@
     </tests>
 
     <help><![CDATA[
-Assemblytics is an application for detecting and analyzing variants from a de novo genome assembly 
-aligned to a reference genome. It incorporates a unique anchor filtering approach to increase 
-robustness to repetitive elements, and identifies six classes of variants based on their distinct 
-alignment signatures. Assemblytics can be applied both to comparing aberrant genomes, such as 
-human cancers, to a reference, or to identify differences between related species. Multiple 
-visualizations enable in-depth explorations of the genomic distributions of variants.
+**Assemblytics** is an application for detecting and analyzing variants from a de novo genome
+assembly aligned to a reference genome. It incorporates a unique anchor filtering approach to
+increase robustness to repetitive elements, and identifies six classes of variants based on their
+distinct alignment signatures. Assemblytics can be applied both to comparing aberrant genomes,
+such as human cancers, to a reference, or to identify differences between related species.
+Multiple visualizations enable in-depth explorations of the genomic distributions of variants.
 
-To run, you will first need to align your assembly to a reference genome using Nucmer, 
-which is part of the MUMmer package. Nucmer is available in Galaxy as Nucmer - just make
-sure to select the "delta" output format. You can then use the resulting delta file as input 
-to Assemblytics.
+To run, first align your assembly to a reference genome using **Nucmer** (part of the MUMmer
+package, available in Galaxy). Make sure to select the **delta** output format. You can then
+use the resulting delta file as input to Assemblytics.
 
-Input parameters:
+**Parameters**
 
-- Unique sequence length required: The unique sequence length required represents an anchor for determining 
-if a sequence is unique enough to safely call variants from, which is an alternative to the mapping 
-quality filter for read alignment. The default value of 10,000 means that a variant must be anchored 
-on at least 10,000 bases of unique sequence to be called. This is generally a very stringent filter, 
-and you may want to reduce this value if you are working with a more fragmented assembly or with a more repetitive genome.
+- ``Unique sequence length required``: An anchor for determining whether a sequence is unique
+  enough to safely call variants from — an alternative to the mapping quality filter used in
+  read alignment. The default of 10,000 means a variant must be anchored by at least 10,000 bp
+  of unique sequence. This is a stringent filter; reduce it for more fragmented assemblies or
+  more repetitive genomes.
 
-- Minimum variant size: Minimum variant size to report. The default value is 50, which means that variants 
-smaller than 50 bp will not be reported. You may want to reduce this value if you are interested in smaller 
-variants, although 50bp is typically the threshold used for structural variations.
+- ``Minimum variant size``: Minimum variant size to report. Defaults to 50 bp; variants smaller
+  than this will not be reported. Reduce this value if you are interested in smaller variants
+  (50 bp is the common threshold for structural variants).
 
-- Maximum variant size: Maximum variant size to report. The default value is 10,000, which means that variants
-wont be reported. Increasing this value may be useful if you are interested in larger variants, although 
-larger values are likely to have spurious variants cased by alignment artifacts, especially if your 
-assembly is more fragmented or your genome is more repetitive.
+- ``Maximum variant size``: Maximum variant size to report. Defaults to 10,000 bp. Increasing
+  this may reveal larger variants, but can also introduce spurious calls caused by alignment
+  artifacts, especially with fragmented assemblies or repetitive genomes.
 
-Output files:
+**Output files**
 
-output.Assemblytics_assembly_stats.txt: statistics on your input assemblies
-output.Assemblytics_structural_variants.summary: text summary file of structural variations in your assembly (also available as a csv)
-output.Assemblytics_structural_variants.bed: bedfile on structural variations in your assembly
-output.variants_between_alignments.bed: bed file of variants found between alignments
-output.variants_within_alignments.bed: bed file of variants found within alignments
-
-output.Assemblytics.unique_length_filtered.delta.gz: Delta file of the unique alignments found after applying the unique length filter
-output.info.csv: csv file of summary information on all alignments
-output.coords.csv: csv file of all alignments (also availble as a tabular file)
-output.coords.query.genome: length of each contig in the query genome with at least one alignment
-output.coords.ref.genome: length of each contig in the reference genoem with at least one alignment
-output.oriented_coords.csv: csv file of all alignments with coordinates oriented to the reference genome
-
-output.Assemblytics.Dotplot_filtered.png: dotplot of the filtered alignments used for variant calling
-output.Assemblytics.Nchart.png: Nchart of the input assemblies (also available as a pdf)
-output.Assemblytics.size_distributions.all_variants.50-500.png: size distribution of all variants between 50 and 500 bp (also available as a pdf)
-output.Assemblytics.size_distributions.all_variants.500-10000.png: size distribution of all variants between 500 and 10,000 bp (also available as a pdf)
-output.Assemblytics.size_distributions.all_variants.log_all_sizes.png: size distribution of all variants of all sizes on a log scale (also available as a pdf)
+- ``output.Assemblytics_assembly_stats.txt``: Statistics on your input assemblies.
+- ``output.Assemblytics_structural_variants.summary``: Text summary of structural variations (also available as a CSV).
+- ``output.Assemblytics_structural_variants.bed``: BED file of structural variations.
+- ``output.variants_between_alignments.bed``: BED file of variants found between alignments.
+- ``output.variants_within_alignments.bed``: BED file of variants found within alignments.
+- ``output.Assemblytics.unique_length_filtered.delta.gz``: Delta file of unique alignments after applying the unique-length filter.
+- ``output.info.csv``: Summary information on all alignments.
+- ``output.coords.csv``: All alignments as a CSV (also available as a tabular file).
+- ``output.coords.query.genome``: Length of each query contig with at least one alignment.
+- ``output.coords.ref.genome``: Length of each reference contig with at least one alignment.
+- ``output.oriented_coords.csv``: All alignments with coordinates oriented to the reference genome.
+- ``output.Assemblytics.Dotplot_filtered.png``: Dotplot of the filtered alignments used for variant calling.
+- ``output.Assemblytics.Nchart.png``: N-chart of the input assemblies (also available as PDF).
+- ``output.Assemblytics.size_distributions.all_variants.50-500.png``: Size distribution of variants between 50 and 500 bp (also available as PDF).
+- ``output.Assemblytics.size_distributions.all_variants.500-10000.png``: Size distribution of variants between 500 and 10,000 bp (also available as PDF).
+- ``output.Assemblytics.size_distributions.all_variants.log_all_sizes.png``: Size distribution of all variants on a log scale (also available as PDF).
     ]]></help>
 
     <citations>
