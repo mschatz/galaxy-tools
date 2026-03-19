@@ -25,8 +25,9 @@
         <requirement type="package" version="@TOOL_VERSION@">assemblytics</requirement>
     </requirements>
 
+    <!-- Note always run the cat output/progress.log to catch errors-->
     <command detect_errors="exit_code"><![CDATA[
-      Assemblytics $delta output $uniquelength $minsize $maxsize ;
+      Assemblytics $delta output $uniquelength $minsize $maxsize &&
       mv output.Assemblytics.unique_length_filtered_l*.delta.gz output.Assemblytics.unique_length_filtered.delta.gz;
       cat output/progress.log
     ]]></command>
@@ -145,21 +146,39 @@ use the resulting delta file as input to Assemblytics.
 **Output files**
 
 - ``output.Assemblytics_assembly_stats.txt``: Statistics on your input assemblies.
+
 - ``output.Assemblytics_structural_variants.summary``: Text summary of structural variations (also available as a CSV).
+
 - ``output.Assemblytics_structural_variants.bed``: BED file of structural variations.
+
 - ``output.variants_between_alignments.bed``: BED file of variants found between alignments.
+
 - ``output.variants_within_alignments.bed``: BED file of variants found within alignments.
+
 - ``output.Assemblytics.unique_length_filtered.delta.gz``: Delta file of unique alignments after applying the unique-length filter.
+
 - ``output.info.csv``: Summary information on all alignments.
+
 - ``output.coords.csv``: All alignments as a CSV (also available as a tabular file).
+
 - ``output.coords.query.genome``: Length of each query contig with at least one alignment.
+
 - ``output.coords.ref.genome``: Length of each reference contig with at least one alignment.
+
 - ``output.oriented_coords.csv``: All alignments with coordinates oriented to the reference genome.
+
+**Visualizations**
+
 - ``output.Assemblytics.Dotplot_filtered.png``: Dotplot of the filtered alignments used for variant calling.
+
 - ``output.Assemblytics.Nchart.png``: N-chart of the input assemblies (also available as PDF).
+
 - ``output.Assemblytics.size_distributions.all_variants.50-500.png``: Size distribution of variants between 50 and 500 bp (also available as PDF).
+
 - ``output.Assemblytics.size_distributions.all_variants.500-10000.png``: Size distribution of variants between 500 and 10,000 bp (also available as PDF).
+
 - ``output.Assemblytics.size_distributions.all_variants.log_all_sizes.png``: Size distribution of all variants on a log scale (also available as PDF).
+
     ]]></help>
 
     <citations>
